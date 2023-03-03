@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.netology.netologyrest.exceptions.InvalidCredentials;
 import ru.netology.netologyrest.exceptions.UnauthorizedUser;
-import ru.netology.netologyrest.repository.Authorities;
-import ru.netology.netologyrest.repository.User;
+//import ru.netology.netologyrest.repository.Authorities;
+import ru.netology.netologyrest.repository.CableArea;
+//import ru.netology.netologyrest.repository.User;
 import ru.netology.netologyrest.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -20,23 +21,26 @@ public class AuthorizationService {
         this.userRepository = userRepository;
     }
 
-    public List<Authorities> getAuthorities(String user, String password) {
-
-        if (isEmpty(user) || isEmpty(password)) {
-            throw new InvalidCredentials("User name or password is empty");
-        }
-        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
-        if (isEmpty(userAuthorities)) {
-            throw new UnauthorizedUser("Unknown user " + user);
-        }
-        return userAuthorities;
+    public double calculateCurrent(int transPower, List<CableArea> cableAreaList) {
+        return userRepository.calculateSinglePhaseCurrent(transPower, cableAreaList);
     }
-
-    private boolean isEmpty(String str) {
-        return str == null || str.isEmpty();
-    }
-
-    private boolean isEmpty(List<?> str) {
-        return str == null || str.isEmpty();
-    }
+//    public List<Authorities> getAuthorities(String user, String password) {
+//
+//        if (isEmpty(user) || isEmpty(password)) {
+//            throw new InvalidCredentials("User name or password is empty");
+//        }
+//        List<Authorities> userAuthorities = userRepository.getUserAuthorities(user, password);
+//        if (isEmpty(userAuthorities)) {
+//            throw new UnauthorizedUser("Unknown user " + user);
+//        }
+//        return userAuthorities;
+//    }
+//
+//    private boolean isEmpty(String str) {
+//        return str == null || str.isEmpty();
+//    }
+//
+//    private boolean isEmpty(List<?> str) {
+//        return str == null || str.isEmpty();
+//    }
 }
