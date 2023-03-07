@@ -21,7 +21,7 @@ public class AuthorizationService {
         this.userRepository = userRepository;
     }
 
-    public double calculateCurrent(int transPower, List<CableArea> cableAreaList) {
+    public double calculateCurrent(String transPower, List<CableArea> cableAreaList) {
         return userRepository.calculateSinglePhaseCurrent(transPower, cableAreaList);
     }
 //    public List<Authorities> getAuthorities(String user, String password) {

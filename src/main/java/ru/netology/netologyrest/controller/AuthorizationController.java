@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 public class AuthorizationController {
 
-    public static String result = "test";
+    public static String result = "";
 
     private final AuthorizationService service;
 
@@ -22,9 +22,12 @@ public class AuthorizationController {
         this.service = service;
     }
 
+    @GetMapping("/")
+    public String getStart() {
+        return "index";
+    }
 
-
-    @PostMapping("/singlephasecurrentcalc")
+    @PostMapping("/spcalc")
     public String getParam(@RequestParam("transPower") String transPower, @RequestParam("cableLength_1") String cableLength_1,
                            @RequestParam("cableMaterial_1") String cableMaterial_1, @RequestParam("cableSection_1") String cableSection_1,
                            @RequestParam("cableLength_2") String cableLength_2,
@@ -59,17 +62,16 @@ public class AuthorizationController {
         addCableArea(cableLength_9, cableSection_9, cableMaterial_9, cableAreaList);
         addCableArea(cableLength_10, cableSection_10, cableMaterial_10, cableAreaList);
 
-        double current = service.calculateCurrent(Integer.parseInt(transPower), cableAreaList);
+        double current = service.calculateCurrent(transPower, cableAreaList);
         System.out.println(current);
 
         cableAreaList.clear();
-//        return "singlePhaseCurrentCalculation";
-        result = Double.toString(current);
+        result = String.format("%.3f", current);
         System.out.println(result);
         return "singlePhaseCurrentCalculationResult";
     }
 
-    @GetMapping("/singlephasecurrentcalc")
+    @GetMapping("/spcalc")
     public String getParam() {
         return "singlePhaseCurrentCalculation";
     }

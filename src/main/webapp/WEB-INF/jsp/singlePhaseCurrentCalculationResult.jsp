@@ -11,28 +11,40 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Title</title>
 
-<%--    <script>--%>
 
-<%--        function getResp() {--%>
-<%--            &lt;%&ndash;document.getElementById('resp').setAttribute(<%= AuthorizationController.result%>);&ndash;%&gt;--%>
-<%--            document.getElementById('resp1').textContent = '<%= AuthorizationController.result%>';--%>
-<%--            document.getElementById('resp1').textContent = '<%= AuthorizationController.result%>';--%>
-<%--            // document.getElementById('resp1').textContent = '123';--%>
-<%--            &lt;%&ndash;Iк.з. (однофазный) =&ndash;%&gt;--%>
-<%--            &lt;%&ndash;<%= AuthorizationController.result%>&ndash;%&gt;--%>
-<%--        }--%>
-<%--    </script>--%>
+    <style>
+        .block1 {
+            width: 1170px;
+            max-width: 1170px;
+            min-height: 2000px;
+            padding-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 16px;
+            padding-right: 16px;
+            background: #f6f6f5;
+            /*padding: 5px;*/
+            /*float: left;*/
+            /*position: relative;*/
+            top: 30px;
+            left: 60px;
+            text-align: center;
+        }
+
+        body{
+            /*background-color:#f6f6f5;*/
+            /*color:yellow;*/
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-
-
-    <p id="resp1">Iк.з. (однофазный) =
-        <%= AuthorizationController.result%></p>
-
-
-
+    <p id="resp1">I<sub>к.з.</sub><sup>(1)</sup> =
+        <%= AuthorizationController.result%>
+     А </p>
 
 </body>
 </html>

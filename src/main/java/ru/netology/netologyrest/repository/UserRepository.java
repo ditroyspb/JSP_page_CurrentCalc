@@ -18,28 +18,40 @@ import java.util.Map;
 @Repository
 public class UserRepository {
 
-    public double calculateSinglePhaseCurrent(double transPower, List<CableArea> cableAreaList) {
+    public double calculateSinglePhaseCurrent(String transPower, List<CableArea> cableAreaList) {
 
         double resistance = 0;
         String[] columnMappingCable = {"diameter", "material", "resistance"};
         String[] columnMappingTrans = {"model", "power", "upVoltage", "downVoltage", "idleLoss", "shortCircuitLoss",
                 "idleCurrent", "shortCircuitVoltage", "resistance"};
+        String[] columnMappingThreePhaseTrans = {"power", "scheme", "resistance"};
         String fileCableBaseName = "cableBaseTest.csv";
         String fileTransBaseName = "transBaseTest.csv";
+        String fileThreePhaseTransBaseName = "threePhaseTransBase.csv";
         List<Cable> cableList = parseBaseCable(columnMappingCable, fileCableBaseName);
         List<Trans> transList = parseBaseTrans(columnMappingTrans, fileTransBaseName);
+        List<ThreePhaseTrans> threePhaseTransList = parseBaseThreePhaseTrans(columnMappingThreePhaseTrans, fileThreePhaseTransBaseName);
 
-        for (Trans trans : transList) {
-            if (trans.power == transPower) {
-                resistance += trans.resistance;
-                break;
+        if (transPower.contains("_")) {
+            String[] parts = transPower.split("_");
+            for (ThreePhaseTrans trans : threePhaseTransList) {
+                if (trans.power == Double.parseDouble(parts[0]) && trans.scheme == Integer.parseInt(parts[1])) {
+                    resistance += trans.resistance;
+                    break;
+                }
+            }
+        } else {
+            for (Trans trans : transList) {
+                if (trans.power == Double.parseDouble(transPower)) {
+                    resistance += trans.resistance;
+                    break;
+                }
             }
         }
 
         for (CableArea cableArea : cableAreaList) {
             for (Cable cable : cableList) {
                 if (cableArea.cableSection == cable.diameter && cableArea.cableMaterial.equals(cable.material)) {
-//                    double lengthResistance = cableArea.cableLength / 1000;
                     double areaResistance = cable.resistance * (cableArea.cableLength / 1000) + 0.02;
                     System.out.println(cable.resistance);
                     resistance += areaResistance;
@@ -53,8 +65,6 @@ public class UserRepository {
 
 
     public static List<Cable> parseBaseCable(String[] columnMapping, String fileName) {
-        //todo создать класс, в котором будет generic метод,
-        //todo чтобы не пришлось дублировать методы
         List<Cable> list = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(fileName))) {
             ColumnPositionMappingStrategy<Cable> strategy = new ColumnPositionMappingStrategy<>();
@@ -71,8 +81,6 @@ public class UserRepository {
     }
 
     public static List<Trans> parseBaseTrans(String[] columnMapping, String fileName) {
-        //todo создать класс, в котором будет generic метод,
-        //todo чтобы не пришлось дублировать методы
         List<Trans> list = new ArrayList<>();
         try (CSVReader csvReader = new CSVReader(new FileReader(fileName))) {
             ColumnPositionMappingStrategy<Trans> strategy = new ColumnPositionMappingStrategy<>();
@@ -87,43 +95,20 @@ public class UserRepository {
         }
         return list;
     }
+
+    public static List<ThreePhaseTrans> parseBaseThreePhaseTrans(String[] columnMapping, String fileName) {
+        List<ThreePhaseTrans> list = new ArrayList<>();
+        try (CSVReader csvReader = new CSVReader(new FileReader(fileName))) {
+            ColumnPositionMappingStrategy<ThreePhaseTrans> strategy = new ColumnPositionMappingStrategy<>();
+            strategy.setType(ThreePhaseTrans.class);
+            strategy.setColumnMapping(columnMapping);
+            CsvToBean<ThreePhaseTrans> csv = new CsvToBeanBuilder<ThreePhaseTrans>(csvReader)
+                    .withMappingStrategy(strategy)
+                    .build();
+            list = csv.parse();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
-
-
-//    private final Map<User, List<Authorities>> usersAuthoritiesList;
-
-//    private UserRepository() {
-//        usersAuthoritiesList = addUsersAutorities();
-//    }
-
-//    public List<Authorities> getUserAuthorities(String user, String password) {
-//        List<Authorities> ans = new ArrayList<>();
-//        for (Map.Entry<User, List<Authorities>> pair : usersAuthoritiesList.entrySet()) {
-//            if (pair.getKey().getUser().equals(user) && pair.getKey().getPassword().equals(password))  {
-//                ans = pair.getValue();
-//            }
-//        }
-//        return ans;
-//    }
-//
-//    private Map<User, List<Authorities>> addUsersAutorities() {
-//        Map<User, List<Authorities>> usersAuthoritiesList = new HashMap<>();
-//        List<Authorities> opt1 = new ArrayList<>();
-//        opt1.add(Authorities.READ);
-//        opt1.add(Authorities.WRITE);
-//        opt1.add(Authorities.DELETE);
-//        List<Authorities> opt2 = new ArrayList<>();
-//        opt2.add(Authorities.READ);
-//        opt2.add(Authorities.WRITE);
-//        List<Authorities> opt3 = new ArrayList<>();
-//        opt3.add(Authorities.READ);
-//        User user1 = new User("andrey", "12345");
-//        User user2 = new User("ivan", "123");
-//        User user3 = new User("nastya", "123456789");
-//
-//        usersAuthoritiesList.put(user3, opt3);
-//        usersAuthoritiesList.put(user1, opt1);
-//        usersAuthoritiesList.put(user2, opt2);
-//        return usersAuthoritiesList;
-//    }
-
