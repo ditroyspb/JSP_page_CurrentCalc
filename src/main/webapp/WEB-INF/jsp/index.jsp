@@ -45,7 +45,7 @@
 
     <h1>Электротехнические расчеты</h1>
 
-    <p><a href="http://localhost:8080/singlephasecurrentcalc">Расчет однофазного тока КЗ в сетях 0,4/0,23 кВ</a></p>
+    <p><a href="http://localhost:8080/spcalc">Расчет однофазного тока КЗ в сетях 0,4/0,23 кВ</a></p>
 
 </div>
 </body>

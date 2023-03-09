@@ -658,7 +658,9 @@
     <p align="left"><br><br></p><a href="#" onclick="location.reload(); return false;">
     Начать новый расчет
 </a>
-    <p></p>
+    <p><br></p>
+
+    <p><a href="http://dev-vap.ru/">Вернуться на главную</a></p>
 
 </div>
 </body>
