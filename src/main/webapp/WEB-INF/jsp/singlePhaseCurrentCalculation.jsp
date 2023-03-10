@@ -204,7 +204,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, мм<sup>2</sup></td>
                 <td>
                     <select name="cableSection_1">
                         <option value="2,5">2.5</option>
@@ -257,7 +257,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, мм<sup>2</sup></td>
                 <td>
                     <select name="cableSection_2">
                         <option value="2,5">2.5</option>
@@ -302,7 +302,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_3">
                         <option value="2,5">2.5</option>
@@ -347,7 +347,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_4">
                         <option value="2,5">2.5</option>
@@ -392,7 +392,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_5">
                         <option value="2,5">2.5</option>
@@ -437,7 +437,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_6">
                         <option value="2,5">2.5</option>
@@ -482,7 +482,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_7">
                         <option value="2,5">2.5</option>
@@ -527,7 +527,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_8">
                         <option value="2,5">2.5</option>
@@ -572,7 +572,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_9">
                         <option value="2,5">2.5</option>
@@ -617,7 +617,7 @@
             </tr>
 
             <tr>
-                <td>Введите сечение кабеля, мм^2</td>
+                <td>Введите сечение кабеля, <sup>2</sup></td>
                 <td>
                     <select name="cableSection_10">
                         <option value="2,5">2.5</option>
